@@ -3,7 +3,15 @@ on:
   push:
     branches:
       - main
+      - dev
+env:
+  MONGODB_DB_NAME: gha-demo
 jobs:
+  env:
+    MONGODB_CLUSTER_ADDRESS: cluster0.15pwqcc.mongodb.net
+    MONGODB_USERNAME: maximilian
+    MONGODB_PASSWORD: X34Mqtpg10D8RGTi
+    PORT: 8080
   test:
     runs-on: ubuntu-latest
     steps:
@@ -18,8 +26,12 @@ jobs:
         run: npm ci
       - name: Lint code
         run: npm run lint
+      - name: Test server
+        run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Test code
         run: npm run test
+      - name: Output information
+        run: echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
   build:
     needs: test
     runs-on: ubuntu-latest
@@ -58,5 +70,7 @@ jobs:
         run: ls -R dist
       - name: Output filename
         run: echo ${{needs.build.outputs.script-file}}
-      - name: Deploy
-        run: echo "Deploying..."
+      - name: Output information
+        run: |
+          echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
+          echo "MONGODB_PASSWORD: ${{ env.MONGODB_PASSWORD }}"
