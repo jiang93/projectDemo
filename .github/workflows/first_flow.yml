@@ -5,8 +5,7 @@ on:
       - opened
       - edited
   Workflow_dispatch:
-  
-  jobs:
+jobs:
   first-job:
     runs-on: ubuntu-latest
     steps:
