@@ -1,10 +1,9 @@
 name: Second Workflow
-on:
-  issues:
+on: issues
 jobs:
-  first-job:
+  issue-info:
     runs-on: ubuntu-latest
     steps:
-      - name: Print Issue Details
+      - name: Print Issues
         run: echo '${{ toJson(github.event) }}'
 
