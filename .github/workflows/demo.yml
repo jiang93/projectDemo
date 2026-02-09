@@ -43,6 +43,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: dist-files
+          path: dist
       - name: Output contents 
         run: ls -R dist
       - name: Output filename
