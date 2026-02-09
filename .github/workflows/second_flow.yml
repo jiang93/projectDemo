@@ -6,4 +6,3 @@ jobs:
     steps:
       - name: Print Issues
         run: echo '${{ toJson(github.event) }}'
-
