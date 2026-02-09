@@ -1,6 +1,12 @@
 name: First Workflow
-on: push
-jobs:
+on: 
+  pull_request:
+    types:
+      - opened
+      - edited
+  Workflow_dispatch:
+  
+  jobs:
   first-job:
     runs-on: ubuntu-latest
     steps:
