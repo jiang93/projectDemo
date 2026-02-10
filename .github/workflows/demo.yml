@@ -6,14 +6,15 @@ on:
       - dev
 env:
   MONGODB_DB_NAME: gha-demo
+
 jobs:
   test:
     runs-on: ubuntu-latest
-  env:
-    MONGODB_CLUSTER_ADDRESS: cluster0.tcswtrr.mongodb.net
-    MONGODB_USERNAME: admin007_mongodb
-    MONGODB_PASSWORD: Rdv0Iv5BMfXe11zK
-    PORT: 8080
+    env:
+      MONGODB_CLUSTER_ADDRESS: cluster0.tcswtrr.mongodb.net
+      MONGODB_USERNAME: admin007_mongodb
+      MONGODB_PASSWORD: Rdv0Iv5BMfXe11zK
+      PORT: 8080
     steps:
       - name: Get code
         uses: actions/checkout@v3
