@@ -31,7 +31,8 @@ jobs:
       - name: Test code
         run: npm run test
       - name: Output information
-        run: echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
+        run: | 
+          echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
   build:
     needs: test
     runs-on: ubuntu-latest
