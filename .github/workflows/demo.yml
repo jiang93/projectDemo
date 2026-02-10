@@ -6,7 +6,6 @@ on:
       - dev
 env:
   MONGODB_DB_NAME: gha-demo
-
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -32,44 +31,10 @@ jobs:
       - name: Output information
         run: | 
           echo "MONGODB_DB_NAME: ${{ env.MONGODB_DB_NAME }}"
-  build:
+  deploy:
     needs: test
     runs-on: ubuntu-latest
-    outputs: 
-      script-file: ${{ steps.publish.outputs.output-file }}
     steps:
-      - name: Get code
-        uses: actions/checkout@v3
-      - name: Cache dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: deps-node-modules-${{ hashFiles('**/package-lock.json') }}
-      - name: Install dependencies
-        run: npm ci
-      - name: Build website
-        run: npm run build
-      - name: Publish JS filename
-        id: publish
-        run: find dist/assets -type f -name "index*.js" -exec echo "output-file={}" \; >> $GITHUB_OUTPUT
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: dist-files
-          path: dist
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Get build artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: dist-files
-          path: dist
-      - name: Output contents 
-        run: ls -R dist
-      - name: Output filename
-        run: echo ${{needs.build.outputs.script-file}}
       - name: Output information
         run: |
           echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
