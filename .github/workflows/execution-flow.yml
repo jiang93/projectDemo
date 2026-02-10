@@ -36,7 +36,7 @@ jobs:
         id:  test-code # id reference for Test code step
         run: npm run test
       - name: Upload test report # only when test fails
-        if: ${{ steps.test-code.outcome == 'failure' }}
+        if: failure() && ${{ steps.test-code.outcome == 'failure' }}
         uses: actions/upload-artifact@v4
         with:
           name: test-report
