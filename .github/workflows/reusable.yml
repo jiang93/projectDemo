@@ -10,4 +10,4 @@ jobs:
         #with:
           #name: ${{ inputs.artifact-name }}
       - name: Output information
-        run: echo "Deploying & uploading..."
+        run: echo "Deploying & uploading from reusable workflow..."
