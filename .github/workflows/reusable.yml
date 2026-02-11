@@ -4,9 +4,9 @@ on:
     inputs:
       artifact-name:
         description:
-          required: false
-          default: dist
-          type: string
+        required: false
+        default: dist
+        type: string
 jobs:
   deploy:
     runs-on: ubuntu-latest
